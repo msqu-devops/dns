@@ -22,159 +22,27 @@ before_script:
       docker build \
         --squash \
         --no-cache \
-        --build-arg ANSIBLE=${ANSIBLE:-"0"} \
-        --build-arg AWSCLI=${AWSCLI:-"0"} \
-        --build-arg BASE=${BASE:-"0"} \
-        --build-arg DEBUG=${DEBUG:-"0"} \
-        --build-arg GITHUB_HUB_VERSION=${GITHUB_HUB_VERSION:-"0"} \
-        --build-arg HASHICORP=${HASHICORP:-"0"} \
-        --build-arg HASHICORP_FIXED=${HASHICORP_FIXED:-"0"} \
-        --build-arg KUBECTL=${KUBECTL:-"0"} \
-        --build-arg PIP_REQUIREMENTS=${PIP_REQUIREMENTS:-"requirements.in"} \
-        --build-arg PKR_VERSION=${PKR_VERSION:-""} \
-        --build-arg SOPS_VERSION=${SOPS_VERSION:-""} \
-        --build-arg TF_VERSION=${TF_VERSION:-""} \
-        --build-arg TFLINT_VERSION=${TFLINT_VERSION:-"latest"} \
-        --build-arg TFM_VERSION=${TFM_VERSION:-"latest"} \
-        --build-arg YQ=${YQ:-"0"} \
-        --build-arg YQ_FIXED=${YQ_FIXED:-"0"} \
-        --build-arg YQ_VERSION=${YQ_VERSION:-"0"} \
-        --build-arg XQREPACK=${XQREPACK:-"0"} \
         --tag $CONTAINER_IMAGE:$IMAGE_TAG-$CI_COMMIT_SHA \
         --tag $CONTAINER_IMAGE:$IMAGE_TAG \
         -f ${DOCKERFILE:-./Dockerfile} \
         .
     - docker push $CONTAINER_IMAGE:$IMAGE_TAG
     # add tag if available
-    # - >
-    #   if [[ ! -z $CI_BUILD_REF_NAME ]]; then
-    #     docker tag $CONTAINER_IMAGE:$IMAGE_TAG-$CI_COMMIT_SHA \
-    #                $CONTAINER_IMAGE:$IMAGE_TAG-$CI_BUILD_REF_NAME
-    #     docker push $CONTAINER_IMAGE:$IMAGE_TAG-$CI_BUILD_REF_NAME
-    #   fi
+    - >
+      if [[ ! -z $CI_BUILD_REF_NAME ]]; then
+        docker tag $CONTAINER_IMAGE:$IMAGE_TAG-$CI_COMMIT_SHA \
+                   $CONTAINER_IMAGE:$IMAGE_TAG-$CI_BUILD_REF_NAME
+        docker push $CONTAINER_IMAGE:$IMAGE_TAG-$CI_BUILD_REF_NAME
+      fi
 
-bullseye-base:
+cloudns:
   <<: *build-template
   variables:
-    IMAGE_TAG: "bullseye-base"
-    DOCKERFILE: "Dockerfile.Bullseye"
-    BASE: "1"
+    IMAGE_TAG: "cloudns"
+    DOCKERFILE: "cloudns/Dockerfile"
 
-bullseye-debug:
+cloudns-shot:
   <<: *build-template
   variables:
-    IMAGE_TAG: "debug"
-    DOCKERFILE: "Dockerfile.Bullseye"
-    BASE: "1"
-    DEBUG: "1"
-
-bullseye-ansible:
-  <<: *build-template
-  variables:
-    IMAGE_TAG: "bullseye-ansible"
-    DOCKERFILE: "Dockerfile.Bullseye"
-    BASE: "1"
-    ANSIBLE: "1"
-
-bullseye-ci:
-  <<: *build-template
-  variables:
-    IMAGE_TAG: "bullseye-ci"
-    DOCKERFILE: "Dockerfile.Bullseye"
-    BASE: "1"
-    ANSIBLE: "1"
-    AWSCLI: "1"
-    HASHICORP: "1"
-    YQ: "1"
-
-bullseye-kubectl:
-  <<: *build-template
-  variables:
-    IMAGE_TAG: "bullseye-kubectl"
-    DOCKERFILE: "Dockerfile.Bullseye"
-    BASE: "1"
-    KUBECTL: "1"
-
-buster-base:
-  <<: *build-template
-  variables:
-    IMAGE_TAG: "buster-base"
-    DOCKERFILE: "Dockerfile.Buster"
-    BASE: "1"
-
-buster-debug:
-  <<: *build-template
-  variables:
-    IMAGE_TAG: "buster-debug"
-    DOCKERFILE: "Dockerfile.Buster"
-    BASE: "1"
-    DEBUG: "1"
-
-buster-ansible:
-  <<: *build-template
-  variables:
-    IMAGE_TAG: "buster-ansible"
-    DOCKERFILE: "Dockerfile.Buster"
-    BASE: "1"
-    ANSIBLE: "1"
-
-buster-ci:
-  <<: *build-template
-  variables:
-    IMAGE_TAG: "buster-ci"
-    DOCKERFILE: "Dockerfile.Buster"
-    BASE: "1"
-    ANSIBLE: "1"
-    AWSCLI: "1"
-    HASHICORP: "1"
-    YQ: "1"
-
-buster-xqrepack:
-  <<: *build-template
-  variables:
-    IMAGE_TAG: "xqrepack"
-    DOCKERFILE: "Dockerfile.Buster"
-    BASE: "1"
-    XQREPACK: "1"
-
-focal-de:
-  <<: *build-template
-  variables:
-    IMAGE_TAG: "de"
-    DOCKERFILE: "Dockerfile.Focal"
-    BASE: "1"
-    ANSIBLE: "1"
-    PIP_REQUIREMENTS: "requirements_ans29.in"
-    AWSCLI: "1"
-    GITHUB_HUB_VERSION: "2.14.2"
-    HASHICORP: "1"
-    HASHICORP_FIXED: "1"
-    PKR_VERSION: "1.7.8"
-    SOPS_VERSION: "3.7.1"
-    TF_VERSION: "1.1.6"
-    TFLINT_VERSION: "v0.30.0"
-    TFM_VERSION: "0.2.6"
-    YQ: "1"
-    YQ_FIXED: "1"
-    YQ_VERSION: "4.5.0"
-
-jammy-cd:
-  <<: *build-template
-  variables:
-    IMAGE_TAG: "cd"
-    DOCKERFILE: "Dockerfile.Jammy"
-    BASE: "1"
-    ANSIBLE: "1"
-    PIP_REQUIREMENTS: "requirements_ans29.in"
-    AWSCLI: "1"
-    GITHUB_HUB_VERSION: "2.14.2"
-    HASHICORP: "1"
-    HASHICORP_FIXED: "1"
-    PKR_VERSION: "1.7.8"
-    SOPS_VERSION: "3.7.1"
-    TF_VERSION: "1.1.6"
-    TFLINT_VERSION: "v0.30.0"
-    TFM_VERSION: "0.2.6"
-    YQ: "1"
-    YQ_FIXED: "1"
-    YQ_VERSION: "4.5.0"
+    IMAGE_TAG: "cloudns-shot"
+    DOCKERFILE: "cloudns-shot/Dockerfile"
