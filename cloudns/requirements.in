@@ -1,0 +1,8 @@
+certifi
+chardet
+environs
+idna
+marshmallow
+python-dotenv
+requests
+urllib3
