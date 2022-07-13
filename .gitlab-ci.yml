@@ -18,6 +18,7 @@ before_script:
 .build-template: &build-template
   stage: build
   script:
+    - cd $IMAGE_TAG
     - >
       docker build \
         --squash \
@@ -39,10 +40,33 @@ cloudns:
   <<: *build-template
   variables:
     IMAGE_TAG: "cloudns"
-    DOCKERFILE: "cloudns/Dockerfile"
 
 cloudns-shot:
   <<: *build-template
   variables:
     IMAGE_TAG: "cloudns-shot"
-    DOCKERFILE: "cloudns-shot/Dockerfile"
+
+curl:
+  <<: *build-template
+  variables:
+    IMAGE_TAG: "curl"
+
+digitalocean:
+  <<: *build-template
+  variables:
+    IMAGE_TAG: "digitalocean"
+
+digitalocean-shot:
+  <<: *build-template
+  variables:
+    IMAGE_TAG: "digitalocean-shot"
+
+hetzner:
+  <<: *build-template
+  variables:
+    IMAGE_TAG: "hetzner"
+
+netcup:
+  <<: *build-template
+  variables:
+    IMAGE_TAG: "netcup"
