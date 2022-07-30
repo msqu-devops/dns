@@ -1,6 +1,7 @@
 #!/bin/bash
 
 api_host="https://api.digitalocean.com/v2"
+remove_duplicates=${REMOVE_DUPLICATES:-"true"}
 
 die() {
     echo "$1"
@@ -38,6 +39,44 @@ if [[ -n $ip ]]; then
         echo $record_data
         echo $record_data6
 
+        if [ $(echo "$record_id" | wc -l) -ge 2 ]; then :
+            if [[ "${remove_duplicates}" == "true" ]]; then :
+                echo "'$sub' domain name has duplicate A DNS records, removing duplicates"
+                record_id_to_delete=$(echo "$record_id"| tail -n +2)
+                record_id=$(echo "$record_id"| head -1)
+                record_data=$(echo "$record_data"| head -1)
+
+                while IFS= read -r line; do
+                    curl -s -X DELETE \
+                        -H "Content-Type: application/json" \
+                        -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+                        "$dns_list/$line" &> /dev/null
+                done <<< "$record_id_to_delete"
+            else :
+                echo "Unable to update '$sub' domain name as it has duplicate A DNS records. Set REMOVE_DUPLICATES='true' to remove them."
+                continue
+            fi
+        fi
+
+        if [ $(echo "$record_id6" | wc -l) -ge 2 ]; then :
+            if [[ "${remove_duplicates}" == "true" ]]; then :
+                echo "'$sub' domain name has duplicate AAAA DNS records, removing duplicates"
+                record_id6_to_delete=$(echo "$record_id6"| tail -n +2)
+                record_id6=$(echo "$record_id6"| head -1)
+                record_data6=$(echo "$record_data6"| head -1)
+
+                while IFS= read -r line; do
+                    curl -s -X DELETE \
+                        -H "Content-Type: application/json" \
+                        -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
+                        "$dns_list/$line" &> /dev/null
+                done <<< "$record_id6_to_delete"
+            else :
+                echo "Unable to update '$sub' domain name as it has duplicate AAAA DNS records. Set REMOVE_DUPLICATES='true' to remove them."
+                continue
+            fi
+        fi
+
         # re-enable glob expansion
         set +f
 
@@ -47,7 +86,7 @@ if [[ -n $ip ]]; then
         url6="$dns_list/$record_id6"
 
         if [[ -z $record_id ]]; then
-            echo "No record found with '$sub' domain name. Creating record, sending data=$data to url=$url"
+            echo "No A record found with '$sub' A domain name. Creating record, sending data=$data to url=$url"
 
             new_record=$(curl -s -X POST \
                 -H "Content-Type: application/json" \
@@ -59,7 +98,7 @@ if [[ -n $ip ]]; then
         fi
 
         if [[ "$ip" != "$record_data" ]]; then
-            echo "existing DNS record address ($record_data) doesn't match current IP ($ip), sending data=$data to url=$url"
+            echo "existing A DNS record address ($record_data) doesn't match current IP ($ip), sending data=$data to url=$url"
 
             curl -s -X PUT \
                 -H "Content-Type: application/json" \
@@ -67,11 +106,11 @@ if [[ -n $ip ]]; then
                 -d "$data" \
                 "$url" &> /dev/null
         else
-            echo "existing DNS record address ($record_data) did not need updating"
+            echo "existing A DNS record address ($record_data) did not need updating"
         fi
 
         if [[ -z $record_id6 ]]; then
-            echo "No record found with '$sub' domain name. Creating record, sending data=$data6 to url=$url6"
+            echo "No AAAA record found with '$sub' domain name. Creating record, sending data=$data6 to url=$url6"
 
             new_record6=$(curl -s -X POST \
                 -H "Content-Type: application/json" \
@@ -83,7 +122,7 @@ if [[ -n $ip ]]; then
         fi
 
         if [[ "$ip6" != "$record_data6" ]]; then
-            echo "existing DNS record address ($record_data6) doesn't match current IP ($ip6), sending data=$data6 to url=$url6"
+            echo "existing AAAA DNS record address ($record_data6) doesn't match current IP ($ip6), sending data=$data6 to url=$url6"
 
             curl -s -X PUT \
                 -H "Content-Type: application/json" \
@@ -91,7 +130,7 @@ if [[ -n $ip ]]; then
                 -d "$data6" \
                 "$url6" &> /dev/null
         else
-            echo "existing DNS record address ($record_data6) did not need updating"
+            echo "existing AAAA DNS record address ($record_data6) did not need updating"
         fi
         if [ "$SLEEP" = true ] ; then
             sleep infinity
