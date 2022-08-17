@@ -47,7 +47,7 @@ if [[ -n $ip ]]; then
                 record_data=$(echo "$record_data"| head -1)
 
                 while IFS= read -r line; do
-                    curl -s -X DELETE \
+                    curl --doh-url https://1.1.1.1/dns-query -s -X DELETE \
                         -H "Content-Type: application/json" \
                         -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                         "$dns_list/$line" &> /dev/null
@@ -66,7 +66,7 @@ if [[ -n $ip ]]; then
                 record_data6=$(echo "$record_data6"| head -1)
 
                 while IFS= read -r line; do
-                    curl -s -X DELETE \
+                    curl --doh-url https://1.1.1.1/dns-query -s -X DELETE \
                         -H "Content-Type: application/json" \
                         -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                         "$dns_list/$line" &> /dev/null
@@ -88,7 +88,7 @@ if [[ -n $ip ]]; then
         if [[ -z $record_id ]]; then
             echo "No A record found with '$sub' A domain name. Creating record, sending data=$data to url=$url"
 
-            new_record=$(curl -s -X POST \
+            new_record=$(curl --doh-url https://1.1.1.1/dns-query -s -X POST \
                 -H "Content-Type: application/json" \
                 -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                 -d "$data" \
@@ -100,7 +100,7 @@ if [[ -n $ip ]]; then
         if [[ "$ip" != "$record_data" ]]; then
             echo "existing A DNS record address ($record_data) doesn't match current IP ($ip), sending data=$data to url=$url"
 
-            curl -s -X PUT \
+            curl --doh-url https://1.1.1.1/dns-query -s -X PUT \
                 -H "Content-Type: application/json" \
                 -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                 -d "$data" \
@@ -112,7 +112,7 @@ if [[ -n $ip ]]; then
         if [[ -z $record_id6 ]]; then
             echo "No AAAA record found with '$sub' domain name. Creating record, sending data=$data6 to url=$url6"
 
-            new_record6=$(curl -s -X POST \
+            new_record6=$(curl --doh-url https://1.1.1.1/dns-query -s -X POST \
                 -H "Content-Type: application/json" \
                 -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                 -d "$data6" \
@@ -124,7 +124,7 @@ if [[ -n $ip ]]; then
         if [[ "$ip6" != "$record_data6" ]]; then
             echo "existing AAAA DNS record address ($record_data6) doesn't match current IP ($ip6), sending data=$data6 to url=$url6"
 
-            curl -s -X PUT \
+            curl --doh-url https://1.1.1.1/dns-query -s -X PUT \
                 -H "Content-Type: application/json" \
                 -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                 -d "$data6" \

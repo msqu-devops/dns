@@ -23,7 +23,7 @@ test -z $NAME && die "NAME not set!"
 dns_list="$api_host/domains/$DOMAIN/records"
 
 while ( true ); do
-    domain_records=$(curl -s -X GET \
+    domain_records=$(curl --doh-url https://1.1.1.1/dns-query -s -X GET \
         -H "Content-Type: application/json" \
         -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
         $dns_list"?per_page=200")
@@ -31,7 +31,7 @@ while ( true ); do
     for service in ${services[@]}; do
         echo "Trying with $service..."
 
-        ip="$(curl -s $service | grep '[0-9]\{1,3\}\(\.[0-9]\{1,3\}\)\{3\}')"
+        ip="$(curl --doh-url https://1.1.1.1/dns-query -s $service | grep '[0-9]\{1,3\}\(\.[0-9]\{1,3\}\)\{3\}')"
         test -n "$ip" && break
     done
 
@@ -53,7 +53,7 @@ while ( true ); do
                     record_data=$(echo "$record_data"| head -1)
 
                     while IFS= read -r line; do
-                        curl -s -X DELETE \
+                        curl --doh-url https://1.1.1.1/dns-query -s -X DELETE \
                             -H "Content-Type: application/json" \
                             -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                             "$dns_list/$line" &> /dev/null
@@ -73,7 +73,7 @@ while ( true ); do
             if [[ -z $record_id ]]; then
                 echo "No record found with '$sub' domain name. Creating record, sending data=$data to url=$url"
 
-                new_record=$(curl -s -X POST \
+                new_record=$(curl --doh-url https://1.1.1.1/dns-query -s -X POST \
                     -H "Content-Type: application/json" \
                     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                     -d "$data" \
@@ -85,7 +85,7 @@ while ( true ); do
             if [[ "$ip" != "$record_data" ]]; then
                 echo "existing DNS record address ($record_data) doesn't match current IP ($ip), sending data=$data to url=$url"
 
-                curl -s -X PUT \
+                curl --doh-url https://1.1.1.1/dns-query -s -X PUT \
                     -H "Content-Type: application/json" \
                     -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
                     -d "$data" \
