@@ -27,7 +27,7 @@ variables:
 
     - >
       /kaniko/executor \
-        --context "${CI_PROJECT_DIR}" \
+        --context "${CI_PROJECT_DIR}/${IMAGE_TAG}" \
         --log-timestamp=true \
         --push-retry=2 \
         --single-snapshot \
@@ -38,41 +38,34 @@ variables:
 cloudns:
   <<: *build-template
   variables:
-    DOCKERFILE: "cloudns/Dockerfile"
     IMAGE_TAG: "cloudns"
 
 cloudns-shot:
   <<: *build-template
   variables:
-    DOCKERFILE: "cloudns-shot/Dockerfile"
     IMAGE_TAG: "cloudns-shot"
 
 curl:
   <<: *build-template
   variables:
-    DOCKERFILE: "curl/Dockerfile"
     IMAGE_TAG: "curl"
 
 digitalocean:
   <<: *build-template
   variables:
-    DOCKERFILE: "digitalocean/Dockerfile"
     IMAGE_TAG: "digitalocean"
 
 digitalocean-shot:
   <<: *build-template
   variables:
-    DOCKERFILE: "digitalocean-shot/Dockerfile"
     IMAGE_TAG: "digitalocean-shot"
 
 hetzner:
   <<: *build-template
   variables:
-    DOCKERFILE: "hetzner/Dockerfile"
     IMAGE_TAG: "hetzner"
 
 netcup:
   <<: *build-template
   variables:
-    DOCKERFILE: "netcup/Dockerfile"
     IMAGE_TAG: "netcup"
