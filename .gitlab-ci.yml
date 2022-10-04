@@ -3,10 +3,6 @@ image:
   name: gcr.io/kaniko-project/executor:debug
   entrypoint: [""]
 
-variables:
-  CI_REGISTRY: registry.msqu.de
-  CONTAINER_IMAGE: $CI_REGISTRY/$CI_PROJECT_NAME
-
 # global rules
 .rules-default:
   - if: '$CI_PIPELINE_SOURCE == "web"'
@@ -27,7 +23,7 @@ variables:
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"},\"$DOCKER_REGISTRY\":{\"auth\":\"$(echo -n ${DOCKER_USERNAME}:${DOCKER_PASSWORD} | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
 
     # default tag based on commit
-    - IMAGE_DESTS="--destination $CONTAINER_IMAGE:${IMAGE_TAG}"
+    - IMAGE_DESTS="--destination $CI_REGISTRY_IMAGE:${IMAGE_TAG}"
     - IMAGE_DESTS="$IMAGE_DESTS --destination $DOCKER_USERNAME/${CI_PROJECT_NAME}:${IMAGE_TAG}"
 
     # add tag for reference if available
@@ -36,7 +32,7 @@ variables:
         # replace / with - in reference names
         REF_TAG_NORMALIZED=$(echo $CI_COMMIT_REF_NAME | sed s:/:-:g)
         IMAGE_DESTS="$IMAGE_DESTS --destination $DOCKER_USERNAME/${CI_PROJECT_NAME}:${IMAGE_TAG}-$REF_TAG_NORMALIZED"
-        IMAGE_DESTS="$IMAGE_DESTS --destination $CONTAINER_IMAGE:${IMAGE_TAG}-$REF_TAG_NORMALIZED"
+        IMAGE_DESTS="$IMAGE_DESTS --destination $CI_REGISTRY_IMAGE:${IMAGE_TAG}-$REF_TAG_NORMALIZED"
       fi
 
     - >
