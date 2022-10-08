@@ -20,7 +20,12 @@ image:
   rules: !reference [.rules-default]
   script:
     # Registry Auths
-    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"},\"$DOCKER_REGISTRY\":{\"auth\":\"$(echo -n ${DOCKER_USERNAME}:${DOCKER_PASSWORD} | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - |
+      if [ "$CI_REGISTRY" == "registry.gitlab.com" ]; then
+        echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$(echo -n ${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD} | base64)\"}}}" > /kaniko/.docker/config.json
+      elif [ "$CI_REGISTRY" == "registry.msqu.de" ]; then
+        echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"},\"$DOCKER_REGISTRY\":{\"auth\":\"$(echo -n ${DOCKER_USERNAME}:${DOCKER_PASSWORD} | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+      fi
 
     # default tag based on commit
     - IMAGE_DESTS="--destination $CI_REGISTRY_IMAGE:${IMAGE_TAG}"
