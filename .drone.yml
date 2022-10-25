@@ -9,6 +9,7 @@ steps:
     name: cloudns
     environment:
       CONTEXT_DIR: cloudns
+      DOCKERFILE: cloudns/Dockerfile
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:cloudns"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
@@ -16,6 +17,7 @@ steps:
     name: cloudns-shot
     environment:
       CONTEXT_DIR: cloudns-shot
+      DOCKERFILE: cloudns-shot/Dockerfile
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:cloudns-shot"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
@@ -23,6 +25,7 @@ steps:
     name: curl
     environment:
       CONTEXT_DIR: curl
+      DOCKERFILE: curl/Dockerfile
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:curl"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
@@ -30,6 +33,7 @@ steps:
     name: digitalocean
     environment:
       CONTEXT_DIR: digitalocean
+      DOCKERFILE: digitalocean/Dockerfile
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:digitalocean"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
@@ -37,6 +41,7 @@ steps:
     name: digitalocean-shot
     environment:
       CONTEXT_DIR: digitalocean-shot
+      DOCKERFILE: digitalocean-shot/Dockerfile
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:digitalocean-shot"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
@@ -44,6 +49,7 @@ steps:
     name: hetzner
     environment:
       CONTEXT_DIR: hetzner
+      DOCKERFILE: hetzner/Dockerfile
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:hetzner"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
@@ -51,5 +57,6 @@ steps:
     name: netcup
     environment:
       CONTEXT_DIR: netcup
+      DOCKERFILE: netcup/Dockerfile
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:netcup"
       TAG_REF_NORMALIZED_ENABLE: "false"
