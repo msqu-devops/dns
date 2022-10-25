@@ -7,6 +7,7 @@ steps:
 
   - <<: *ContainerImageKaniko
     name: cloudns
+    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: cloudns
       DOCKERFILE: cloudns/Dockerfile
@@ -15,6 +16,7 @@ steps:
 
   - <<: *ContainerImageKaniko
     name: cloudns-shot
+    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: cloudns-shot
       DOCKERFILE: cloudns-shot/Dockerfile
@@ -23,6 +25,7 @@ steps:
 
   - <<: *ContainerImageKaniko
     name: curl
+    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: curl
       DOCKERFILE: curl/Dockerfile
@@ -31,6 +34,7 @@ steps:
 
   - <<: *ContainerImageKaniko
     name: digitalocean
+    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: digitalocean
       DOCKERFILE: digitalocean/Dockerfile
@@ -39,6 +43,7 @@ steps:
 
   - <<: *ContainerImageKaniko
     name: digitalocean-shot
+    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: digitalocean-shot
       DOCKERFILE: digitalocean-shot/Dockerfile
@@ -47,6 +52,7 @@ steps:
 
   - <<: *ContainerImageKaniko
     name: hetzner
+    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: hetzner
       DOCKERFILE: hetzner/Dockerfile
@@ -55,6 +61,7 @@ steps:
 
   - <<: *ContainerImageKaniko
     name: netcup
+    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: netcup
       DOCKERFILE: netcup/Dockerfile
