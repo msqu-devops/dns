@@ -1,0 +1,55 @@
+_include: https://gitea.msqu.de/devops/build_scripts/raw/branch/main/drone/ContainerImageKaniko.yml
+
+kind: pipeline
+name: default
+
+steps:
+
+  - <<: *ContainerImageKaniko
+    name: cloudns
+    environment:
+      CONTEXT_DIR: cloudns
+      ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:cloudns"
+      TAG_REF_NORMALIZED_ENABLE: "false"
+
+  - <<: *ContainerImageKaniko
+    name: cloudns-shot
+    environment:
+      CONTEXT_DIR: cloudns-shot
+      ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:cloudns-shot"
+      TAG_REF_NORMALIZED_ENABLE: "false"
+
+  - <<: *ContainerImageKaniko
+    name: curl
+    environment:
+      CONTEXT_DIR: curl
+      ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:curl"
+      TAG_REF_NORMALIZED_ENABLE: "false"
+
+  - <<: *ContainerImageKaniko
+    name: digitalocean
+    environment:
+      CONTEXT_DIR: digitalocean
+      ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:digitalocean"
+      TAG_REF_NORMALIZED_ENABLE: "false"
+
+  - <<: *ContainerImageKaniko
+    name: digitalocean-shot
+    environment:
+      CONTEXT_DIR: digitalocean-shot
+      ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:digitalocean-shot"
+      TAG_REF_NORMALIZED_ENABLE: "false"
+
+  - <<: *ContainerImageKaniko
+    name: hetzner
+    environment:
+      CONTEXT_DIR: hetzner
+      ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:hetzner"
+      TAG_REF_NORMALIZED_ENABLE: "false"
+
+  - <<: *ContainerImageKaniko
+    name: netcup
+    environment:
+      CONTEXT_DIR: netcup
+      ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:netcup"
+      TAG_REF_NORMALIZED_ENABLE: "false"
