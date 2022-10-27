@@ -11,7 +11,7 @@ steps:
     environment:
       CONTEXT_DIR: cloudns
       DOCKERFILE: cloudns/Dockerfile
-      ADDITIONAL_REGISTRIES: "gitea.msqu.de/devops/dns:cloudns"
+      TAG_EXPLICIT: "cloudns"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
   - <<: *ContainerImageDocker
@@ -20,7 +20,7 @@ steps:
     environment:
       CONTEXT_DIR: cloudns-shot
       DOCKERFILE: cloudns-shot/Dockerfile
-      ADDITIONAL_REGISTRIES: "gitea.msqu.de/devops/dns:cloudns-shot"
+      TAG_EXPLICIT: "cloudns-shot"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
   - <<: *ContainerImageDocker
@@ -29,7 +29,7 @@ steps:
     environment:
       CONTEXT_DIR: curl
       DOCKERFILE: curl/Dockerfile
-      ADDITIONAL_REGISTRIES: "gitea.msqu.de/devops/dns:curl"
+      ADDITIONAL_REGISTRIES: "curl"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
   - <<: *ContainerImageDocker
@@ -38,7 +38,7 @@ steps:
     environment:
       CONTEXT_DIR: digitalocean
       DOCKERFILE: digitalocean/Dockerfile
-      ADDITIONAL_REGISTRIES: "gitea.msqu.de/devops/dns:digitalocean"
+      TAG_EXPLICIT: "digitalocean"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
   - <<: *ContainerImageDocker
@@ -47,7 +47,7 @@ steps:
     environment:
       CONTEXT_DIR: digitalocean-shot
       DOCKERFILE: digitalocean-shot/Dockerfile
-      ADDITIONAL_REGISTRIES: "gitea.msqu.de/devops/dns:digitalocean-shot"
+      TAG_EXPLICIT: "digitalocean-shot"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
   - <<: *ContainerImageDocker
@@ -56,7 +56,7 @@ steps:
     environment:
       CONTEXT_DIR: hetzner
       DOCKERFILE: hetzner/Dockerfile
-      ADDITIONAL_REGISTRIES: "gitea.msqu.de/devops/dns:hetzner"
+      ADDITIONAL_REGISTRIES: "hetzner"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
   - <<: *ContainerImageDocker
@@ -65,7 +65,7 @@ steps:
     environment:
       CONTEXT_DIR: netcup
       DOCKERFILE: netcup/Dockerfile
-      ADDITIONAL_REGISTRIES: "gitea.msqu.de/devops/dns:netcup"
+      TAG_EXPLICIT: "netcup"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
 services:
