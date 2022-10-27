@@ -29,7 +29,7 @@ steps:
     environment:
       CONTEXT_DIR: curl
       DOCKERFILE: curl/Dockerfile
-      ADDITIONAL_REGISTRIES: "curl"
+      TAG_EXPLICIT: "curl"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
   - <<: *ContainerImageDocker
@@ -56,7 +56,7 @@ steps:
     environment:
       CONTEXT_DIR: hetzner
       DOCKERFILE: hetzner/Dockerfile
-      ADDITIONAL_REGISTRIES: "hetzner"
+      TAG_EXPLICIT: "hetzner"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
   - <<: *ContainerImageDocker
