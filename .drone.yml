@@ -1,11 +1,11 @@
-_include: https://gitea.msqu.de/devops/build_scripts/raw/branch/main/drone/ContainerImageKaniko.yml
+_include: https://gitea.msqu.de/devops/build_scripts/raw/branch/main/drone/ContainerImageDocker.yml
 
 kind: pipeline
 name: default
 
 steps:
 
-  - <<: *ContainerImageKaniko
+  - <<: *ContainerImageDocker
     name: cloudns
     depends_on: [ clone ]
     environment:
@@ -14,7 +14,7 @@ steps:
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:cloudns"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
-  - <<: *ContainerImageKaniko
+  - <<: *ContainerImageDocker
     name: cloudns-shot
     depends_on: [ clone ]
     environment:
@@ -23,7 +23,7 @@ steps:
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:cloudns-shot"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
-  - <<: *ContainerImageKaniko
+  - <<: *ContainerImageDocker
     name: curl
     depends_on: [ clone ]
     environment:
@@ -32,7 +32,7 @@ steps:
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:curl"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
-  - <<: *ContainerImageKaniko
+  - <<: *ContainerImageDocker
     name: digitalocean
     depends_on: [ clone ]
     environment:
@@ -41,7 +41,7 @@ steps:
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:digitalocean"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
-  - <<: *ContainerImageKaniko
+  - <<: *ContainerImageDocker
     name: digitalocean-shot
     depends_on: [ clone ]
     environment:
@@ -50,7 +50,7 @@ steps:
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:digitalocean-shot"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
-  - <<: *ContainerImageKaniko
+  - <<: *ContainerImageDocker
     name: hetzner
     depends_on: [ clone ]
     environment:
@@ -59,7 +59,7 @@ steps:
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:hetzner"
       TAG_REF_NORMALIZED_ENABLE: "false"
 
-  - <<: *ContainerImageKaniko
+  - <<: *ContainerImageDocker
     name: netcup
     depends_on: [ clone ]
     environment:
@@ -67,3 +67,10 @@ steps:
       DOCKERFILE: netcup/Dockerfile
       ADDITIONAL_REGISTRY_DESTINATIONS: "--destination gitea.msqu.de/devops/dns:netcup"
       TAG_REF_NORMALIZED_ENABLE: "false"
+
+services:
+- <<: *ContainerImageDockerDinDService
+  name: svc_docker_dind
+
+volumes:
+- <<: *ContainerImageDockerVolume
