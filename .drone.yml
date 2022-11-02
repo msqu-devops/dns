@@ -13,6 +13,9 @@ steps:
       DOCKERFILE: cloudns/Dockerfile
       TAG_EXPLICIT: "cloudns"
       TAG_REF_NORMALIZED_ENABLE: "false"
+      ADDITIONAL_REGISTRIES: "schmitzis/monorepo:dns-"
+      REGISTRY_AUTH_JSON:
+        from_secret: DOCKER_HUB_AUTH_SCHMITZIS
 
   - <<: *ContainerImageDocker
     name: cloudns-shot
@@ -22,6 +25,9 @@ steps:
       DOCKERFILE: cloudns-shot/Dockerfile
       TAG_EXPLICIT: "cloudns-shot"
       TAG_REF_NORMALIZED_ENABLE: "false"
+      ADDITIONAL_REGISTRIES: "schmitzis/monorepo:dns-"
+      REGISTRY_AUTH_JSON:
+        from_secret: DOCKER_HUB_AUTH_SCHMITZIS
 
   - <<: *ContainerImageDocker
     name: curl
@@ -31,6 +37,9 @@ steps:
       DOCKERFILE: curl/Dockerfile
       TAG_EXPLICIT: "curl"
       TAG_REF_NORMALIZED_ENABLE: "false"
+      ADDITIONAL_REGISTRIES: "schmitzis/monorepo:dns-"
+      REGISTRY_AUTH_JSON:
+        from_secret: DOCKER_HUB_AUTH_SCHMITZIS
 
   - <<: *ContainerImageDocker
     name: digitalocean
@@ -40,6 +49,9 @@ steps:
       DOCKERFILE: digitalocean/Dockerfile
       TAG_EXPLICIT: "digitalocean"
       TAG_REF_NORMALIZED_ENABLE: "false"
+      ADDITIONAL_REGISTRIES: "schmitzis/monorepo:dns-"
+      REGISTRY_AUTH_JSON:
+        from_secret: DOCKER_HUB_AUTH_SCHMITZIS
 
   - <<: *ContainerImageDocker
     name: digitalocean-shot
@@ -49,6 +61,9 @@ steps:
       DOCKERFILE: digitalocean-shot/Dockerfile
       TAG_EXPLICIT: "digitalocean-shot"
       TAG_REF_NORMALIZED_ENABLE: "false"
+      ADDITIONAL_REGISTRIES: "schmitzis/monorepo:dns-"
+      REGISTRY_AUTH_JSON:
+        from_secret: DOCKER_HUB_AUTH_SCHMITZIS
 
   - <<: *ContainerImageDocker
     name: hetzner
@@ -58,6 +73,9 @@ steps:
       DOCKERFILE: hetzner/Dockerfile
       TAG_EXPLICIT: "hetzner"
       TAG_REF_NORMALIZED_ENABLE: "false"
+      ADDITIONAL_REGISTRIES: "schmitzis/monorepo:dns-"
+      REGISTRY_AUTH_JSON:
+        from_secret: DOCKER_HUB_AUTH_SCHMITZIS
 
   - <<: *ContainerImageDocker
     name: netcup
@@ -67,6 +85,9 @@ steps:
       DOCKERFILE: netcup/Dockerfile
       TAG_EXPLICIT: "netcup"
       TAG_REF_NORMALIZED_ENABLE: "false"
+      ADDITIONAL_REGISTRIES: "schmitzis/monorepo:dns-"
+      REGISTRY_AUTH_JSON:
+        from_secret: DOCKER_HUB_AUTH_SCHMITZIS
 
 services:
 - <<: *ContainerImageDockerDinDService
