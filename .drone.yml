@@ -78,6 +78,18 @@ steps:
         from_secret: DOCKER_HUB_AUTH_SCHMITZIS
 
   - <<: *ContainerImageDocker
+    name: hurricane electric
+    depends_on: [ clone ]
+    environment:
+      CONTEXT_DIR: hedns
+      DOCKERFILE: hedns/Dockerfile
+      TAG_EXPLICIT: "hedns"
+      TAG_REF_NORMALIZED_ENABLE: "false"
+      ADDITIONAL_REGISTRIES: "schmitzis/monorepo:dns-"
+      REGISTRY_AUTH_JSON:
+        from_secret: DOCKER_HUB_AUTH_SCHMITZIS
+
+  - <<: *ContainerImageDocker
     name: netcup
     depends_on: [ clone ]
     environment:
