@@ -1,9 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
-# dns credentials
-HOSTS="srv.mufus.de"
-dnstoken=SUP8qJxrMiqDYuyExG1xuZ3AUXLT
+die() {
+    echo "$1"
+    exit 1
+}
+
+test -z "$HOSTS" && die "HOSTS not set!"
+test -z "$DNS_TOKEN" && die "DNS_TOKEN not set!"
 
 # Get Current IPs
 current4=$(dig @resolver3.opendns.com myip.opendns.com +short)
@@ -20,7 +24,7 @@ for h in "${HOSTS[@]}"; do
                 else
                         update="x$update";
                 fi
-                response=$(curl -s --user "$h:$dnstoken" "https://update.dedyn.io/?myipv4=$current4&myipv6=$current6")
+                response=$(curl -s --user "$h:$DNS_TOKEN" "https://update.dedyn.io/?myipv4=$current4&myipv6=$current6")
                 if ! [[ "$response" =~ "good" || "$response" =~ "nochg" ]]; then
                        echo "DNS update failed for $h: $response"
                 fi
