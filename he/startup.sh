@@ -6,8 +6,7 @@ die() {
     exit 1
 }
 
-test -z "$DOMAIN" && die "DOMAIN not set!"
-test -z "$NAME" && die "NAME not set!"
+test -z "$HOSTS" && die "HOSTS not set!"
 test -z "$HOST_KEY" && die "HOST_KEY not set!"
 
 # Get Current IPs
@@ -17,7 +16,7 @@ current6=$(curl -6 -s http://checkip.dns.he.net | grep -o -E '(([0-9a-fA-F]{1,4}
 # initialize store variable
 update=''
 
-for h in "$NAME.$DOMAIN"; do
+for h in "${HOSTS[@]}"; do
         dns4=$(host -t A "$h" | grep -o -E '([0-9]{1,3}\.){3}[0-9]{1,3}')
         if [ "$current4" != "$dns4" ]; then
                 if [ ! -z "$update" ]; then
