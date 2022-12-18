@@ -4,16 +4,7 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
 
-RUN apk add --no-cache python3                                  \
-    && python3 -m ensurepip                                     \
-    && pip3 install -U pip                                      \
-    && rm -rf /usr/lib/python*/ensurepip                        \
-    && rm -rf /root/.cache                                      \
-    && rm -rf /var/cache/apk/*                                  \
-    && find /                                                   \
-        \( -type d -a -name test -o -name tests \)              \
-        -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \)      \
-        -exec rm -rf '{}' +                                     \
+RUN apk add --no-cache python3 py3-pip                          \
     && mkdir /app
 
 WORKDIR /app
