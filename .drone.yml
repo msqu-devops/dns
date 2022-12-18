@@ -66,6 +66,18 @@ steps:
         from_secret: DOCKER_HUB_AUTH_SCHMITZIS
 
   - <<: *ContainerImageDocker
+    name: desec
+    depends_on: [ clone ]
+    environment:
+      CONTEXT_DIR: desec
+      DOCKERFILE: desec/Dockerfile
+      TAG_EXPLICIT: "desec"
+      TAG_REF_NORMALIZED_ENABLE: "false"
+      ADDITIONAL_REGISTRIES: "schmitzis/monorepo:dns-"
+      REGISTRY_AUTH_JSON:
+        from_secret: DOCKER_HUB_AUTH_SCHMITZIS
+
+  - <<: *ContainerImageDocker
     name: hetzner
     depends_on: [ clone ]
     environment:
@@ -81,9 +93,9 @@ steps:
     name: hurricane electric
     depends_on: [ clone ]
     environment:
-      CONTEXT_DIR: hedns
-      DOCKERFILE: hedns/Dockerfile
-      TAG_EXPLICIT: "hedns"
+      CONTEXT_DIR: he
+      DOCKERFILE: he/Dockerfile
+      TAG_EXPLICIT: "he"
       TAG_REF_NORMALIZED_ENABLE: "false"
       ADDITIONAL_REGISTRIES: "schmitzis/monorepo:dns-"
       REGISTRY_AUTH_JSON:
