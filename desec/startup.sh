@@ -10,8 +10,8 @@ test -z "$HOSTS" && die "HOSTS not set!"
 test -z "$DNS_TOKEN" && die "DNS_TOKEN not set!"
 
 # Get Current IPs
-current4=$(dig @resolver3.opendns.com myip.opendns.com +short)
-current6=$(dig @resolver1.ipv6-sandbox.opendns.com AAAA myip.opendns.com +short)
+current4=$(curl https://checkipv4.dedyn.io/)
+current6=$(curl https://checkipv6.dedyn.io/)
 update=''
 
 # update dyndns
