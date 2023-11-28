@@ -7,7 +7,6 @@ steps:
 
   - <<: *ContainerImageDocker
     name: cloudns
-    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: cloudns
       DOCKERFILE: cloudns/Dockerfile
@@ -20,7 +19,6 @@ steps:
 
   - <<: *ContainerImageDocker
     name: cloudns-shot
-    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: cloudns-shot
       DOCKERFILE: cloudns-shot/Dockerfile
@@ -33,7 +31,6 @@ steps:
 
   - <<: *ContainerImageDocker
     name: curl
-    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: curl
       DOCKERFILE: curl/Dockerfile
@@ -46,7 +43,6 @@ steps:
 
   - <<: *ContainerImageDocker
     name: digitalocean
-    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: digitalocean
       DOCKERFILE: digitalocean/Dockerfile
@@ -59,7 +55,6 @@ steps:
 
   - <<: *ContainerImageDocker
     name: digitalocean-shot
-    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: digitalocean-shot
       DOCKERFILE: digitalocean-shot/Dockerfile
@@ -72,7 +67,6 @@ steps:
 
   - <<: *ContainerImageDocker
     name: desec
-    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: desec
       DOCKERFILE: desec/Dockerfile
@@ -85,7 +79,6 @@ steps:
 
   - <<: *ContainerImageDocker
     name: hetzner
-    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: hetzner
       DOCKERFILE: hetzner/Dockerfile
@@ -98,7 +91,6 @@ steps:
 
   - <<: *ContainerImageDocker
     name: hurricane electric
-    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: he
       DOCKERFILE: he/Dockerfile
@@ -111,7 +103,6 @@ steps:
 
   - <<: *ContainerImageDocker
     name: netcup
-    depends_on: [ clone ]
     environment:
       CONTEXT_DIR: netcup
       DOCKERFILE: netcup/Dockerfile
