@@ -29,6 +29,7 @@ jobs:
           docker_context_dir: ${{ github.workspace }}/cloudns
           dockerfile: ${{ github.workspace }}/cloudns/Dockerfile
           docker_args: "--tag gitea.msqu.de/devops/dns:cloudns"
+          tag_commit_enable: false
           tag_semver_enable: false
           additional_registries: "schmitzis/monorepo:cloudns"
           registry_auth_json: ${{ secrets.DOCKER_HUB_AUTH_SCHMITZIS }}
