@@ -10,9 +10,8 @@ jobs:
   docker_image:
     runs-on: ubuntu-latest
     steps:
-      - uses: https://github.com/actions/checkout@master
-        with:
-          fetch-depth: 1
+      - name: Checkout
+        uses: https://github.com/actions/checkout@master
 
       # - id: information
       #   uses: https://gitea.dhswt.de/actions/information@master
@@ -23,7 +22,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: https://github.com/docker/setup-buildx-action@v3
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image cloudns
         uses: https://gitea.msqu.de/cicd/docker@master
         #uses: https://gitea.dhswt.de/actions/docker@master
         with:
