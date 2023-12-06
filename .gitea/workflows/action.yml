@@ -28,11 +28,11 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/cloudns
           dockerfile: ${{ github.workspace }}/cloudns/Dockerfile
-          docker_args: "--tag gitea.msqu.de/devops/dns:cloudns"
+          additional_registries: hub.docker.com/schmitzis/dns
+          additional_tags: cloudns
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
-          additional_registries: "schmitzis/monorepo:cloudns"
           registry_auth_json: ${{ secrets.DOCKER_HUB_AUTH_SCHMITZIS }}
           docker_multiarch: true
           ci_registry_password: ${{ secrets.ACT_RUNNER_PAT }}
@@ -44,11 +44,11 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/cloudns-shot
           dockerfile: ${{ github.workspace }}/cloudns-shot/Dockerfile
-          docker_args: "--tag gitea.msqu.de/devops/dns:cloudns-shot"
+          additional_registries: hub.docker.com/schmitzis/dns
+          additional_tags: cloudns-shot
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
-          additional_registries: "schmitzis/monorepo:cloudns-shot"
           registry_auth_json: ${{ secrets.DOCKER_HUB_AUTH_SCHMITZIS }}
           docker_multiarch: true
           ci_registry_password: ${{ secrets.ACT_RUNNER_PAT }}
@@ -60,11 +60,11 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/curl
           dockerfile: ${{ github.workspace }}/curl/Dockerfile
-          docker_args: "--tag gitea.msqu.de/devops/dns:curl"
+          additional_registries: hub.docker.com/schmitzis/dns
+          additional_tags: curl
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
-          additional_registries: "schmitzis/monorepo:curl"
           registry_auth_json: ${{ secrets.DOCKER_HUB_AUTH_SCHMITZIS }}
           docker_multiarch: true
           ci_registry_password: ${{ secrets.ACT_RUNNER_PAT }}
@@ -76,11 +76,11 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/digitalocean
           dockerfile: ${{ github.workspace }}/digitalocean/Dockerfile
-          docker_args: "--tag gitea.msqu.de/devops/dns:cloudns"
+          additional_registries: hub.docker.com/schmitzis/dns
+          additional_tags: digitalocean
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
-          additional_registries: "schmitzis/monorepo:digitalocean"
           registry_auth_json: ${{ secrets.DOCKER_HUB_AUTH_SCHMITZIS }}
           docker_multiarch: true
           ci_registry_password: ${{ secrets.ACT_RUNNER_PAT }}
@@ -92,11 +92,11 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/digitalocean-shot
           dockerfile: ${{ github.workspace }}/digitalocean-shot/Dockerfile
-          docker_args: "--tag gitea.msqu.de/devops/dns:digitalocean-shot"
+          additional_registries: hub.docker.com/schmitzis/dns
+          additional_tags: digitalocean-shot
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
-          additional_registries: "schmitzis/monorepo:digitalocean-shot"
           registry_auth_json: ${{ secrets.DOCKER_HUB_AUTH_SCHMITZIS }}
           docker_multiarch: true
           ci_registry_password: ${{ secrets.ACT_RUNNER_PAT }}
@@ -108,11 +108,11 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/desec
           dockerfile: ${{ github.workspace }}/desec/Dockerfile
-          docker_args: "--tag gitea.msqu.de/devops/dns:desec"
+          additional_registries: hub.docker.com/schmitzis/dns
+          additional_tags: desec
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
-          additional_registries: "schmitzis/monorepo:desec"
           registry_auth_json: ${{ secrets.DOCKER_HUB_AUTH_SCHMITZIS }}
           docker_multiarch: true
           ci_registry_password: ${{ secrets.ACT_RUNNER_PAT }}
@@ -124,11 +124,11 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/hetzner
           dockerfile: ${{ github.workspace }}/hetzner/Dockerfile
-          docker_args: "--tag gitea.msqu.de/devops/dns:hetzner"
+          additional_registries: hub.docker.com/schmitzis/dns
+          additional_tags: hetzner
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
-          additional_registries: "schmitzis/monorepo:hetzner"
           registry_auth_json: ${{ secrets.DOCKER_HUB_AUTH_SCHMITZIS }}
           docker_multiarch: true
           ci_registry_password: ${{ secrets.ACT_RUNNER_PAT }}
@@ -140,27 +140,27 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/he
           dockerfile: ${{ github.workspace }}/he/Dockerfile
-          docker_args: "--tag gitea.msqu.de/devops/dns:he"
+          additional_registries: hub.docker.com/schmitzis/dns
+          additional_tags: he
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
-          additional_registries: "schmitzis/monorepo:digitalocean"
           registry_auth_json: ${{ secrets.DOCKER_HUB_AUTH_SCHMITZIS }}
           docker_multiarch: true
           ci_registry_password: ${{ secrets.ACT_RUNNER_PAT }}
 
       - name: Build and push Docker image netcup
         if: success() || failure()
-        uses: https://gitea.msqu.de/cicd/docker@master
-        #uses: https://gitea.dhswt.de/actions/docker@master
+        #uses: https://gitea.msqu.de/cicd/docker@master
+        uses: https://gitea.dhswt.de/actions/docker@master
         with:
           docker_context_dir: ${{ github.workspace }}/netcup
           dockerfile: ${{ github.workspace }}/netcup/Dockerfile
-          docker_args: "--tag gitea.msqu.de/devops/dns:netcup"
+          additional_registries: hub.docker.com/schmitzis/dns
+          additional_tags: netcup
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
-          additional_registries: "schmitzis/monorepo:netcup"
           registry_auth_json: ${{ secrets.DOCKER_HUB_AUTH_SCHMITZIS }}
           docker_multiarch: true
           ci_registry_password: ${{ secrets.ACT_RUNNER_PAT }}
