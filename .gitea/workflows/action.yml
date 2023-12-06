@@ -26,8 +26,8 @@ jobs:
         uses: https://gitea.msqu.de/cicd/docker@master
         #uses: https://gitea.dhswt.de/actions/docker@master
         with:
-          docker_context_dir: cloudns
-          dockerfile: cloudns/Dockerfile
+          docker_context_dir: ${{ github.workspace }}/cloudns
+          dockerfile: ${{ github.workspace }}/cloudns/Dockerfile
           docker_args: "--tag gitea.msqu.de/devops/dns:cloudns"
           tag_commit_enable: false
           additional_registries: "schmitzis/monorepo:cloudns"
