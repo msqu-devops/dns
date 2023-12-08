@@ -28,8 +28,8 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/cloudns
           dockerfile: ${{ github.workspace }}/cloudns/Dockerfile
-          additional_registries: hub.docker.com/schmitzis/dns
-          additional_tags: cloudns
+          additional_registries: "schmitzis/dns"
+          tags_additional: cloudns
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
@@ -44,8 +44,8 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/cloudns-shot
           dockerfile: ${{ github.workspace }}/cloudns-shot/Dockerfile
-          additional_registries: hub.docker.com/schmitzis/dns
-          additional_tags: cloudns-shot
+          additional_registries: "schmitzis/dns"
+          tags_additional: cloudns-shot
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
@@ -60,8 +60,8 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/curl
           dockerfile: ${{ github.workspace }}/curl/Dockerfile
-          additional_registries: hub.docker.com/schmitzis/dns
-          additional_tags: curl
+          additional_registries: "schmitzis/dns"
+          tags_additional: curl
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
@@ -76,8 +76,8 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/digitalocean
           dockerfile: ${{ github.workspace }}/digitalocean/Dockerfile
-          additional_registries: hub.docker.com/schmitzis/dns
-          additional_tags: digitalocean
+          additional_registries: "schmitzis/dns"
+          tags_additional: digitalocean
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
@@ -92,8 +92,8 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/digitalocean-shot
           dockerfile: ${{ github.workspace }}/digitalocean-shot/Dockerfile
-          additional_registries: hub.docker.com/schmitzis/dns
-          additional_tags: digitalocean-shot
+          additional_registries: "schmitzis/dns"
+          tags_additional: digitalocean-shot
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
@@ -108,8 +108,8 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/desec
           dockerfile: ${{ github.workspace }}/desec/Dockerfile
-          additional_registries: hub.docker.com/schmitzis/dns
-          additional_tags: desec
+          additional_registries: "schmitzis/dns"
+          tags_additional: desec
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
@@ -124,8 +124,8 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/hetzner
           dockerfile: ${{ github.workspace }}/hetzner/Dockerfile
-          additional_registries: hub.docker.com/schmitzis/dns
-          additional_tags: hetzner
+          additional_registries: "schmitzis/dns"
+          tags_additional: hetzner
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
@@ -140,8 +140,8 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/he
           dockerfile: ${{ github.workspace }}/he/Dockerfile
-          additional_registries: hub.docker.com/schmitzis/dns
-          additional_tags: he
+          additional_registries: "schmitzis/dns"
+          tags_additional: he
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
@@ -156,8 +156,8 @@ jobs:
         with:
           docker_context_dir: ${{ github.workspace }}/netcup
           dockerfile: ${{ github.workspace }}/netcup/Dockerfile
-          additional_registries: hub.docker.com/schmitzis/dns
-          additional_tags: netcup
+          additional_registries: "schmitzis/dns"
+          tags_additional: netcup
           tag_commit_enable: false
           tag_semver_enable: false
           tag_ref_normalized_enable: false
